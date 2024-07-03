@@ -16,6 +16,7 @@ const app = express();
 const bookRoutes = require('../routes/booksRouter.js');
 
 const authRoutes = require('../routes/authRoutes.js');
+const tematicasRoutes = require('../routes/tematicasRoutes.js');
 
 //4- Declaramos el puerto
 const PORT = process.env.PORT || 3000; 
