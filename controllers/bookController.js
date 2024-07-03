@@ -3,7 +3,14 @@ const db = require('../db/db');
 //2- Método para obtener todos los libros
 const getAllBooks = (req, res) => {
     // Creamos una consulta
-    const sql = 'SELECT * FROM libros';
+    const sql = `SELECT 
+                    books.*,
+                    tematica.name AS tematica_name
+                FROM 
+                    books
+                JOIN 
+                    tematica ON books.tematica_id = tematica.id
+                `;
 
     // Utilizamos .query para enviar la consulta a la bbdd
     // Primer parametro la consulta, segundo una función callback
