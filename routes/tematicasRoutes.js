@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const tematicaController = require('../controllers/tematicaControllers.js');
+const tematicaController = require('../controllers/tematicaController.js');
 
 router.get('/', tematicaController.getAllTematicas);
 router.get('/:id', tematicaController.getTematicaById);

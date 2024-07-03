@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 // 3- Importamos el módulo propio bookController (a realizarlo a futuro)
-const bookController = require('../controllers/bookControllers.js');
+const bookController = require('../controllers/bookController.js');
 
 // 4- En bookController programaremos el módulo junto a métodos GET, POST, PUT, DELETE
 // Dejaremos sólo la declaración de las rutas, con sus métodos 
