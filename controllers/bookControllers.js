@@ -1,11 +1,11 @@
 const db = require('../db/db');
 
-//2- Método para obtener todas las peliculas
+//2- Método para obtener todos los libros
 const getAllBooks = (req, res) => {
     // Creamos una consulta
     const sql = 'SELECT * FROM libros';
 
-    // Utilizamos .query para enviar la consulra a la bbdd
+    // Utilizamos .query para enviar la consulta a la bbdd
     // Primer parametro la consulta, segundo una función callback
     db.query(sql, (err, results) => {
         //si sucede algun error
@@ -19,7 +19,7 @@ const getAllBooks = (req, res) => {
 const getBookById = (req, res) => {
     // Tomamos la solicitud y extraemos su id
     // Esta es una notacion de desestructuración {id}
-    // en la req viaja /movies/1, la expresion {id} estrae el nro 1 de la ruta
+    // en la req viaja /books/1, la expresion {id} estrae el nro 1 de la ruta
     // y la almacena dentro de la variable id
     const { id } = req.params;
 
@@ -41,11 +41,11 @@ const getBookById = (req, res) => {
 
 const createBook = (req, res) => {
  
-    const { title, autor, year,tapa } = req.body;
+    const { title, autor, year,tapa,tematica_id } = req.body;
 
-    const sql = 'INSERT INTO libros (title, autor, year, tapa ) VALUES (?, ?, ?, ? )';
+    const sql = 'INSERT INTO libros (title, autor, year, tapa, tematica_id ) VALUES (?, ?, ?, ?, ? )';
 
-    db.query(sql, [title, autor ,year, tapa], (err, result) => {
+    db.query(sql, [title, autor ,year, tapa, tematica_id], (err, result) => {
 
          err ? console.log(err):res.json({ message: 'Libro creado', bookId: result.insertId });
     });
@@ -53,7 +53,7 @@ const createBook = (req, res) => {
 
 const updateBook = (req, res) => {
     const { id } = req.params;
-    const { title, autor, year, tapa } = req.body;
+    const { title, autor, year, tapa, tematica_id } = req.body;
 
     // Crea un array para almacenar las oraciones seteadas y otro para los valores
     let setClauses = [];
@@ -74,6 +74,10 @@ const updateBook = (req, res) => {
     if (tapa) {
         setClauses.push('tapa = ?');
         values.push(tapa);
+    }
+    if (tematica_id) {
+        setClauses.push('tematica_id = ?');
+        values.push(tematica_id);
     }
 
     // Si ningún campo se actualiza retorna mensaje de error
@@ -96,7 +100,7 @@ const updateBook = (req, res) => {
             console.log(err);
             return res.status(500).json({ mensaje: "Error al actualizar el libro" });
         }
-        res.json({ mensaje: "Libro Actualizado" });
+        res.json({ mensaje: "Libro actualizado" });
     });
 };
 

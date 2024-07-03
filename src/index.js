@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 //6- Prefijo principal de las rutas y delegación de las sub-rutas
 app.use('/books', bookRoutes);
 app.use('/auth', authRoutes);
+app.use('/tematicas', tematicasRoutes);
 
 /*
 
