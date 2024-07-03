@@ -1,7 +1,7 @@
 const db = require('../db/db');
 
 const getAllTematicas = (req, res) => {
-    const sql = 'SELECT * FROM tematicas';
+    const sql = 'SELECT * FROM tematica';
     db.query(sql, (err, results) => {
         if (err) {
             console.log(err);
@@ -13,7 +13,7 @@ const getAllTematicas = (req, res) => {
 
 const getTematicaById = (req, res) => {
     const { id } = req.params;
-    const sql = 'SELECT * FROM tematicas WHERE id = ?';
+    const sql = 'SELECT * FROM tematica WHERE id = ?';
 
     db.query(sql, [id], (err, result) => {
         if (err) {
@@ -27,7 +27,7 @@ const getTematicaById = (req, res) => {
 const createTematica = (req, res) => {
     const { name } = req.body;
 
-    const sql = 'INSERT INTO tematicas (name) VALUES (?)';
+    const sql = 'INSERT INTO tematica (name) VALUES (?)';
 
     db.query(sql, [name], (err, result) => {
 
@@ -59,7 +59,7 @@ const updateTematica = (req, res) => {
     values.push(id);
 
     // Construye la query
-    const sql = `UPDATE tematicas SET ${setClauseString} WHERE id = ?`;
+    const sql = `UPDATE tematica SET ${setClauseString} WHERE id = ?`;
 
     // Ejecuta la query
     db.query(sql, values, (err, results) => {
@@ -75,7 +75,7 @@ const deleteTematica = (req, res) => {
     //Desestructuramos la peticion
     const { id } = req.params;
 
-    const sql = 'DELETE FROM tematicas WHERE id = ?';
+    const sql = 'DELETE FROM tematica WHERE id = ?';
 
     db.query(
         sql,
