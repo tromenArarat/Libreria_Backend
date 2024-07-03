@@ -13,7 +13,7 @@ const app = express();
 // app.options('*', cors());
 
 //3- Importamos el módulo movieRoutes (se lo diseñará a futuro)
-const bookRoutes = require('../routes/booksRouter.js');
+const bookRoutes = require('../routes/booksRoutes.js');
 
 const authRoutes = require('../routes/authRoutes.js');
 const tematicasRoutes = require('../routes/tematicasRoutes.js');
