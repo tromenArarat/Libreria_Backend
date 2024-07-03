@@ -4,12 +4,12 @@ const db = require('../db/db');
 const getAllBooks = (req, res) => {
     // Creamos una consulta
     const sql = `SELECT 
-                    books.*,
+                    libros.*,
                     tematica.name AS tematica_name
                 FROM 
-                    books
+                    libros
                 JOIN 
-                    tematica ON books.tematica_id = tematica.id
+                    tematica ON libros.tematica_id = tematica.id
                 `;
 
     // Utilizamos .query para enviar la consulta a la bbdd
