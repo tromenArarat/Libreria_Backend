@@ -14,7 +14,6 @@ const app = express();
 
 //3- Importamos el módulo movieRoutes (se lo diseñará a futuro)
 const bookRoutes = require('../routes/booksRoutes.js');
-
 const authRoutes = require('../routes/authRoutes.js');
 const tematicasRoutes = require('../routes/tematicasRoutes.js');
 
@@ -27,15 +26,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // cors
+app.use(cors({}));
 
-app.use((req, res, next) => {
-   res.header('Access-Control-Allow-Origin',"https://tromenararat.github.io");
-   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-   res.header('Access-Control-Allow-Credentials', 'true');
+// app.use((req, res, next) => {
+//    res.header('Access-Control-Allow-Origin',"https://tromenararat.github.io");
+//    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//    res.header('Access-Control-Allow-Credentials', 'true');
 
-   next();
-});
+//    next();
+// });
 
 // app.use(cors({ 
 //    origin: [ process.env.CROSSORIGIN], 
