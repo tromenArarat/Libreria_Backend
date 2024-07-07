@@ -2,7 +2,6 @@ const db = require('../db/db');
 
 //2- Método para obtener todos los libros
 const getAllBooks = (req, res) => {
-    // Creamos una consulta
     const sql = `SELECT 
                     libros.*,
                     tematica.name AS tematica_name
@@ -12,25 +11,22 @@ const getAllBooks = (req, res) => {
                     tematica ON libros.tematica_id = tematica.id
                 `;
 
-    // Utilizamos .query para enviar la consulta a la bbdd
-    // Primer parametro la consulta, segundo una función callback
     db.query(sql, (err, results) => {
-        //si sucede algun error
         if (err) {console.log(err);
             return;} 
-        //enviamos el resultado en formato json
         res.json(results);
     });
 };
 
 const getBookById = (req, res) => {
     // Tomamos la solicitud y extraemos su id
-    // Esta es una notacion de desestructuración {id}
-    // en la req viaja /books/1, la expresion {id} estrae el nro 1 de la ruta
+    // por desestructuración {id}
+    // En la req viaja /books/1, la expresion {id} estrae el nro 1 de la ruta
     // y la almacena dentro de la variable id
     const { id } = req.params;
 
     // Creamos la consulta con marcador de posición
+    // ¡¡¡
     const sql = 'SELECT * FROM libros WHERE id = ?';
 
     // Los marcadores de posición se utilizan para evitar la inyección de SQL, 
