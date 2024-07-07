@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const config = require('../config/config.js');
+require('dotenv').config();
 const db = require('../db/db');
 
 const register = (req,res) => {
@@ -14,7 +14,7 @@ const register = (req,res) => {
             res.status(500).send({ "error": err });
             return;
           }
-        const token = jwt.sign({id:result.insertId},config.secretKey,{expiresIn:config.tokenExpiresIn});
+        const token = jwt.sign({id:result.insertId},process.env.CLAVE_DEV,{expiresIn:'5M'});
         res.status(201).send({auth:true,token});
         });
 };
@@ -27,7 +27,7 @@ const login = (req,res)=>{
         if(!usuario) return console.error('Usuario no encontrado');
         const passwordIsValid = bcrypt.compareSync(clave,usuario.clave);
         if(!passwordIsValid) return res.status(401).send({auth:false,token:null});
-        const token = jwt.sign({id:usuario.id},config.secretKey,{expiresIn:config.tokenExpiresIn});
+        const token = jwt.sign({id:usuario.id},process.env.CLAVE_DEV,{expiresIn:'5M'});
         res.status(200).send({auth:true,token});
        });
 

@@ -19,9 +19,9 @@ const mysql = require('mysql2');
 
 // 2 | Configuramos la conexión
 const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASS,
+    host: process.env.HOST_DEV,
+    user: process.env.USER_DEV,
+    password: process.env.PASS_DEV,
     port: process.env.MYSQLPORT
 });
 
@@ -52,7 +52,9 @@ connection.connect((err)=>{
                     title VARCHAR(255) NOT NULL,
                     autor VARCHAR(255) NOT NULL,
                     year INT NOT NULL,
-                    tapa VARCHAR(255) NOT NULL
+                    tapa VARCHAR(255) NOT NULL,
+                    tematica_id INT,
+                    FOREIGN KEY(tematica_id) REFERENCES tematica(tematica_id)
                     );
                 `;
                 connection.query(createTableQuery, (err,results)=>{
@@ -78,6 +80,20 @@ connection.connect((err)=>{
                     }
                     console.log('Tabla usuarios asegurada');
                 });
+            const createTableQuery3 = `
+                CREATE TABLE IF NOT EXISTS tematica (
+                    tematica_id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(255) NOT NULL UNIQUE
+                    );
+                `;
+                connection.query(createTableQuery3, (err,results)=>{
+                    if(err){
+                        console.error('Error creando tabla: ',err);
+                        return;
+                    }
+                    console.log('Tabla temáticas asegurada');
+                });
             });
+            
     });
 module.exports = connection;

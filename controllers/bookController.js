@@ -8,7 +8,7 @@ const getAllBooks = (req, res) => {
                 FROM 
                     libros
                 JOIN 
-                    tematica ON libros.tematica_id = tematica.id
+                    tematica ON libros.tematica_id = tematica.tematica_id
                 `;
 
     db.query(sql, (err, results) => {
