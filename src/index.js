@@ -16,6 +16,7 @@ const app = express();
 const bookRoutes = require('../routes/booksRoutes.js');
 const authRoutes = require('../routes/authRoutes.js');
 const tematicasRoutes = require('../routes/tematicasRoutes.js');
+const detallesRoutes = require('../routes/detallesRoutes.js');
 
 //4- Declaramos el puerto
 const PORT = process.env.PORT || 3000; 
@@ -47,6 +48,7 @@ app.use(cors({}));
 app.use('/books', bookRoutes);
 app.use('/auth', authRoutes);
 app.use('/tematicas', tematicasRoutes);
+app.use('/details', detallesRoutes);
 
 /*
 
