@@ -15,8 +15,18 @@ const bookController = require('../controllers/bookController.js');
 router.get('/', bookController.getAllBooks);
 //Ruta para la consulta de libros por id
 router.get('/:id', bookController.getBookById);
+
+// Middleware to check if user is logged in
+const isLoggedIn = (req, res, next) => {
+    if (req.session.user) {
+        next();
+    } else {
+        res.status(401).json({ message: 'User not logged in' });
+    }
+};
+
 //Ruta para crear un libro
-router.post('/', bookController.createBook);
+router.post('/books', bookController.createLibro);
 //Ruta para actualizar un libro
 router.put('/:id', bookController.updateBook);
 //Ruta para borrar una libro

@@ -54,7 +54,12 @@ connection.connect((err)=>{
                     year INT NOT NULL,
                     tapa VARCHAR(255) NOT NULL,
                     tematica_id INT,
-                    FOREIGN KEY(tematica_id) REFERENCES tematica(tematica_id)
+                    FOREIGN KEY(tematica_id) REFERENCES tematica(tematica_id),
+                    detalle_id INT,
+                    FOREIGN KEY(detalle_id) REFERENCES detalle(detalle_id),
+                    paginas INT,
+                    resenia VARCHAR(255),
+                    devoluciones VARCHAR(255)
                     );
                 `;
                 connection.query(createTableQuery, (err,results)=>{
@@ -92,6 +97,26 @@ connection.connect((err)=>{
                         return;
                     }
                     console.log('Tabla temáticas asegurada');
+                });
+            const createTableQuery4 = `
+                CREATE TABLE IF NOT EXISTS detalle (
+                    detalle_id INT AUTO_INCREMENT PRIMARY KEY,
+                    isbn VARCHAR(50) NOT NULL UNIQUE,
+                    editorial VARCHAR(50),
+                    idioma VARCHAR(50),
+                    traductor VARCHAR(50),
+                    formato VARCHAR(50),
+                    lanzamiento DATE,
+                    adicional VARCHAR(255),
+                    pdf VARCHAR(255)
+                    );
+                `;
+                connection.query(createTableQuery4, (err,results)=>{
+                    if(err){
+                        console.error('Error creando tabla: ',err);
+                        return;
+                    }
+                    console.log('Tabla detalle asegurada');
                 });
             });
             
